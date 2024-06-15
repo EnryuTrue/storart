@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Tic Tac Toe</title>
+    <style>
+        /* Add some basic styling for the Tic Tac Toe board */
+        .board {
+            display: grid;
+            grid-template-columns: repeat(3, 100px);
+            grid-template-rows: repeat(3, 100px);
+            gap: 2px;
+        }
+
+        .cell {
+            width: 100px;
+            height: 100px;
+            border: 1px solid black;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>Tic Tac Toe</h1>
+    <div class="board">
+        <div class="cell" onclick="makeMove(0, 0)"></div>
+        <div class="cell" onclick="makeMove(0, 1)"></div>
+        <div class="cell" onclick="makeMove(0, 2)"></div>
+        <div class="cell" onclick="makeMove(1, 0)"></div>
+        <div class="cell" onclick="makeMove(1, 1)"></div>
+        <div class="cell" onclick="makeMove(1, 2)"></div>
+        <div class="cell" onclick="makeMove(2, 0)"></div>
+        <div class="cell" onclick="makeMove(2, 1)"></div>
+        <div class="cell" onclick="makeMove(2, 2)"></div>
+    </div>
+
+    <script>
+        // JavaScript logic for the Tic Tac Toe game
+        var board = [[null, null, null], [null, null, null], [null, null, null]];
+        var currentPlayer = 'X';
+        var gameOver = false;
+
+        function makeMove(row, col) {
+            if (!gameOver && board[row][col] === null) {
+                board[row][col] = currentPlayer;
+                document.getElementsByClassName('cell')[row * 3 + col].innerText = currentPlayer;
+                checkWin();
+                togglePlayer();
+            }
+        }
+
+        function checkWin() {
+            // Check rows, columns, and diagonals for a win
+            for (var i = 0; i < 3; i++) {
+                if (board[i][0] === currentPlayer && board[i][1] === currentPlayer && board[i][2] === currentPlayer) {
+                    gameOver = true;
+                }
+                if (board[0][i] === currentPlayer && board[1][i] === currentPlayer && board[2][i] === currentPlayer) {
+                    gameOver = true;
+                }
+            }
+
+            if (board[0][0] === currentPlayer && board[1][1] === currentPlayer && board[2][2] === currentPlayer) {
+                gameOver = true;
+            }
+
+            if (board[0][2] === currentPlayer && board[1][1] === currentPlayer && board[2][0] === currentPlayer) {
+                gameOver = true;
+            }
+
+            // Display a message when the game is over
+            if (gameOver) {
+                alert('Player ' + currentPlayer + ' wins!');
+            }
+        }
+
+        function togglePlayer() {
+            currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,79 @@
+{% extends 'home.html' %}
+{% block title %}Profile{% endblock title %}
+{% block content2 %}
+  
+    <section class="fade-in p-4 text-center">
+    <img src="{{ user.profile_picture.url }}" alt="Profile" class="profile-image mx-auto rounded-full">
+    <h1 class="text-2xl mt-4 text-white">{{ user.username }}</h1>
+    <p class="text-gray-400">Art enthusiast, Worldwide</p>
+    <div class="mt-4">
+        <a href="{% url 'view_messages' %}"><button class="bg-orange-500 hover:bg-orange-600 text-white py-2 px-4 rounded-full mr-2">See your messages</button></a>
+        <a href="{% url 'edit_profile' %}"><button class="bg-orange-500 hover:bg-orange-600 text-white py-2 px-4 rounded-full mr-2">Edit Profile</button></a>
+        <a href="{% url 'lounge' %}"><button class="bg-orange-500 hover:bg-orange-600 text-white py-2 px-4 rounded-full mr-2">upload your work</button></a>
+        <a href="{% url 'settings' %}"><button class="bg-orange-500 hover:bg-orange-600 text-white py-2 px-4 rounded-full mr-2">Settings</button></a>
+
+    </div>
+    <p class="mt-4 text-gray-400">{{ user.bio }}</p>
+</section>
+    
+
+
+    <div class="max-w-5 mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div class="text-white fade-in text-2xl font-semibold mb-6 flex justify-start mx-auto px-4 mt-12" style="font-family: 'Source Sans Pro'; line-height: 30px;">
+        Your Latest Artworks
+    </div>
+
+    <div class="card-slider fade-in text-white z-10" style="padding: 5px">
+        <div class="card-container" id="cardSlider">
+            {% for post in art_posts %}
+            <div class="card">
+                <a href="{% url 'product_page' post.id %}" class="block">
+                    <img src="{{ post.image.url }}" class="artwork-image rounded-xl transition duration-300 transform hover:scale-105" alt="{{ post.title }}">
+                    <p class="mt-2 text-center">{{ post.title }}</p>
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div class="text-white fade-in text-2xl font-semibold mb-6 flex justify-start mx-auto px-4 mt-12" style="font-family: 'Source Sans Pro'; line-height: 30px;">
+        Favorite art
+    </div>
+
+    <div class="card-slider fade-in text-white z-10" style="padding: 5px">
+        <div class="card-container" id="cardSlider">
+            {% for post in favorites %}
+            <div class="card">
+                <a href="{% url 'product_page' post.art.id %}" class="block">
+                    <img src="{{ post.art.image.url }}" class="artwork-image rounded-xl transition duration-300 transform hover:scale-105" alt="{{ post.art.title }}">
+                    <p class="mt-2 text-center">{{ post.art.title }}</p>
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+    
+    
+    
+    <style>
+    .profile-image {
+        width: 150px; /* Fixed width */
+        height: 150px; /* Fixed height */
+        object-fit: cover; /* Ensures the image covers the set dimensions without distortion */
+    }
+    .artwork-image {
+        width: 288px;
+        height: 288px; 
+        object-fit: cover; 
+        margin: 2px;
+        
+    }
+</style>
+
+
+{% endblock content2%}
+

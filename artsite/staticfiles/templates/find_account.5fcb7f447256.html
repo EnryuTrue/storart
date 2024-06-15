@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Find Your Account</title>
+</head>
+<body>
+    <h1>Find Your Account</h1>
+    {% for message in messages %}
+    <li>{{ message }}</li>
+    {% endfor %}
+    <form method="post">
+        {% csrf_token %}
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required>
+        <br>
+        <label for="phone">Phone Number:</label>
+        <input type="text" id="phone" name="phone" required>
+        <br>
+        <input type="submit" value="Find Account">
+    </form>
+    <p><a href="{% url 'login' %}">Back to Login</a></p>
+</body>
+</html>

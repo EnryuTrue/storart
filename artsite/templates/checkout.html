@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout</title>
+    <link rel="stylesheet" href="/output.css">
+</head>
+<body class="bg-black text-white">
+<div class="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <h1 class="text-4xl font-bold text-center text-orange-500 mb-8">Checkout</h1>
+    <div class="flex flex-wrap -mx-4">
+        <div class="w-full lg:w-1/2 px-4 mb-8 lg:mb-0">
+            <h2 class="text-2xl font-bold text-orange-500 mb-4">Billing Information</h2>
+            <form action="{% url 'success' %}" >
+                <div class="mb-4">
+                    <label class="block mb-2 text-sm font-medium text-orange-500">Full Name</label>
+                    <input value="{{ user.full_name }}" class="w-full px-3 py-2 bg-black text-white border border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500" type="text" placeholder="Enter your full name">
+                </div>
+                <div class="mb-4">
+                    <label class="block mb-2 text-sm font-medium text-orange-500">Address</label>
+                    <input  value="{{ user.address }}" class="w-full px-3 py-2 bg-black text-white border border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500" type="text" placeholder="Enter your address">
+                </div>
+                <div class="mb-4">
+                    <label class="block mb-2 text-sm font-medium text-orange-500">City</label>
+                    <input class="w-full px-3 py-2 bg-black text-white border border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500" type="text" placeholder="Enter your city">
+                </div>
+                <div class="mb-4">
+                    <label class="block mb-2 text-sm font-medium text-orange-500">Country</label>
+                    <select class="w-full px-3 py-2 bg-black text-white border border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500">
+                        <option>Select Country</option>
+                        <!-- Add country options here -->
+                    </select>
+                </div>
+                <div class="mb-4">
+                    <label class="block mb-2 text-sm font-medium text-orange-500">Postal Code</label>
+                    <input class="w-full px-3 py-2 bg-black text-white border border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500" type="text" placeholder="Enter your postal code">
+                </div>
+
+                <h2 class="text-2xl font-bold text-orange-500 mb-4">Payment Method</h2>
+                <div class="mb-4">
+                    <label class="block mb-2 text-sm font-medium text-orange-500">Credit Card Number</label>
+                    <input class="w-full px-3 py-2 bg-black text-white border border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500" type="text" placeholder="Enter your credit card number">
+                </div>
+                <div class="flex gap-4 mb-4">
+                    <div class="w-1/2">
+                        <label class="block mb-2 text-sm font-medium text-orange-500">Expiry Date</label>
+                        <input class="w-full px-3 py-2 bg-black text-white border border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500" type="text" placeholder="MM/YY">
+                    </div>
+                    <div class="w-1/2">
+                        <label class="block mb-2 text-sm font-medium text-orange-500">CVV</label>
+                        <input class="w-full px-3 py-2 bg-black text-white border border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500" type="text" placeholder="Enter CVV">
+                    </div>
+
+                </div>
+                <div class="w-1/2">
+
+                    <label class="mr-2 text-sm font-medium text-orange-500">by clicking this you acccept user conditions</label>
+                    <input type="checkbox">
+                </div>
+                <a href="{% url 'success' %}">
+                    <button class="w-full bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded mt-4 transition-colors duration-200">
+                        Complete Purchase
+
+                    </button></a>
+                <label class="mr-2 text-sm font-medium text-center text-orange-500"> <a href="{% url 'home' %}" >Go back home</a> </label>
+            </form>
+        </div>
+        <div class="w-full lg:w-1/2 px-4">
+            <h2 class="text-2xl font-bold text-orange-500 mb-4">Order Summary</h2>
+            <div class="bg-gray-800 p-4 rounded-lg">
+                {% for item in items %}
+                    <div class="flex justify-between mb-4">
+                        <span>{{ item.art_post.title }}</span>
+                        <span>${{ item.art_post.price }} x {{ item.quantity }}</span>
+                    </div>
+                    {% endfor %}
+                    <!-- Add more products as necessary -->
+                    <div class="flex justify-between font-bold text-lg text-orange-500">
+                        <span>Total</span>
+                        <span>${{total}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

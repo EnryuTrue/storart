@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login Page</title>
+</head>
+<body>
+
+    <h1>Login</h1>
+    {% for message in messages %}
+    <li>{{ message }}</li>
+    {% endfor %}
+    <form method="post">
+        {% csrf_token %}
+        <label for="phone">phone number: </label>
+        <input type="text" name="phone" required>
+        <br>
+        <label for="username">Username:</label>
+        <input type="text" name="username" required>
+        <br>
+        <label for="password">Password:</label>
+        <input type="password" name="password" required>
+        <br>
+        <input type="submit" value="Login">
+    </form>
+    <p>{{ messages }}</p>
+    <p>Don't have an account? <a href="{% url 'signup' %}">Sign Up</a></p>
+    <p>forgot ur password? <a href="{% url 'find_account' %}">recover ur account</a></p>
+
+</body>
+</html>

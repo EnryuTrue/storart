@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Member Details</title>
+</head>
+<body>
+    <h1>Member Details</h1>
+    <p>Member Name: {{ member.username }}</p>
+    <p>Date Joined: {{ member.date_joined|date:"F d, Y H:i:s" }}</p> <!-- Format the date display -->
+    <p>Phone Number: {{ member.phone}}</p>
+    <!-- Add more member details here if needed -->
+<a href="{% url 'chats' %}">Go Back to Chats</a>
+</body>
+</html>
+

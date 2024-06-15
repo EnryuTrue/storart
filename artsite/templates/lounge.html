@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Art Lounge</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f2f2f2;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            padding: 20px;
+        }
+        .post {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-bottom: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+        }
+        .post img {
+            max-width: 100%;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Art Lounge</h1>
+        <p>Share your art and creativity with others!</p>
+
+        <!-- Form to submit a new art post -->
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <label >Choose an image:</label>
+            <input type="file" name="image" required>
+            <br>
+            <label >specify a price:</label>
+            <input type="number" name="price" required>
+            <br>
+            <label >Choose a title:</label>
+            <input type="text" name="title" required>
+            <br><br><br>
+            <label for="id_category">Category:</label>
+            <select name="category" id="id_category" class="form-control">
+            {% for choice in form.category.field.choices %}
+                <option value="{{ choice.0 }}" placeholder="chose a category">{{ choice.1 }}</option>
+            {% endfor %}
+            <br><br>
+
+            <label>Description:</label>
+            <textarea name="description" required></textarea>
+            <br>
+            <label for="id_category">Type:</label>
+            <select name="type" id="id_type" class="form-control">
+            {% for choice in form.type.field.choices %}
+                <option value="{{ choice.0 }}">{{ choice.1 }}</option>
+            {% endfor %}
+            <br><br>
+            <input type="submit" value="Submit">
+        </form>
+    {% for message in messages %}
+            <p style="color: #8f00b2;">{{ message }}</p>
+        {% endfor %}
+       <p><a href="{% url 'chats' %}">back to chats</a></p>
+
+        <hr>
+
+        <!-- Display existing art posts -->
+        {% for post in art_posts %}
+            <div class="post">
+                <img src="{{ post.image.url }}" alt="{{ post.description }}">
+
+
+            <p>uploaded by: {{ post.user.username }}</p>
+            </div>
+        {% empty %}
+            <p>No art posts yet.</p>
+        {% endfor %}
+    </div>
+</body>
+</html>

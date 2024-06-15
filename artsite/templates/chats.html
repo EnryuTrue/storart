@@ -1,0 +1,50 @@
+
+
+
+    <div class="container">
+        <h1>Chats</h1>
+        {% for message in messages %}
+            <p style="color: #8f00b2;">{{ message }}</p>
+        {% endfor %}
+        <p>Welcome, {{ user.username }}!</p>
+        <p>Your email is: {{ user.email }}</p>
+        <p>Your phone number is: {{ user.phone }}</p>
+        <a href="{% url 'lounge' %}" class="button">Visit Lounge</a>
+        <br>
+        <a href="{% url 'modify_credentials' %}">Modify Your Credentials</a>
+        <br>
+        <a href="{% url 'logoutuser' %}">Sign Out</a>
+        <br>
+        <a href="{% url 'confirm_delete_account' %}">Delete Account</a>
+        <br>
+        <h2>All Members:</h2>
+        <ul class="members-list">
+            {% for member in members %}
+                {% if member != user %}
+                    <li><h3>{{ member.id }} <a href="{% url 'member_details' member.id %}">{{ member.username }}</a></h3></li>
+                {% endif %}
+            {% endfor %}
+        </ul>
+    </div>
+
+
+    <div class="dots-container">
+        {% for dot in dot_positions %}
+            <div class="dot" style="top: {{ dot.top }}vh; left: {{ dot.left }}vw;"></div>
+        {% endfor %}
+    </div>
+
+    <div class="container">
+        <!-- Rest of your content here -->
+    </div>
+
+    <script>
+        const dotsContainer = document.querySelector('.dots-container');
+
+        document.addEventListener('mousemove', (e) => {
+            const x = e.clientX / window.innerWidth - 0.5;
+            const y = e.clientY / window.innerHeight - 0.5;
+            dotsContainer.style.setProperty('--mouse-x', x);
+            dotsContainer.style.setProperty('--mouse-y', y);
+        });
+    </script>

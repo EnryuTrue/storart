@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sign Up</title>
+</head>
+<body>
+    <h1>Sign Up</h1>
+    <form method="post">
+        {% csrf_token %}
+        <label for="phone">phone:</label>
+        <input type="phone" name="phone" required>
+        <br>
+        <label for="username">Username:</label>
+        <input type="text" name="username" required>
+        <br>
+        <label for="password">Password:</label>
+        <input type="password" name="password" required>
+        <br>
+        <input type="submit" value="Sign Up">
+        {% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li>{{ message }} <a href="{% url 'login' %}">Log In</a></p> </li>
+    {% endfor %}
+</ul>
+{% endif %}
+    </form>
+    <p>{{ messages }}</p>
+    <p>Already have an account? <a href="{% url 'login' %}">Log In</a></p>
+    <p>forgot ur password? <a href="{% url 'find_account' %}">recover ur account</a></p>
+
+</body>
+</html>

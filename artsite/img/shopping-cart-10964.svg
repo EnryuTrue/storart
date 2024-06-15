@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="256" height="256" viewBox="0 0 256 256" xml:space="preserve">
+
+<defs>
+</defs>
+<g style="stroke: none; stroke-width: 0; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: none; fill-rule: nonzero; opacity: 1;" transform="translate(1.4065934065934016 1.4065934065934016) scale(2.81 2.81)" >
+	<path d="M 79.396 60.177 H 23.138 c -1.96 0 -3.631 -1.42 -3.947 -3.354 L 13.112 19.68 c -0.19 -1.158 0.139 -2.341 0.899 -3.236 c 0.76 -0.895 1.875 -1.41 3.048 -1.41 H 86 c 1.184 0 2.306 0.524 3.066 1.431 c 0.76 0.907 1.079 2.104 0.872 3.269 l -6.604 37.143 C 82.995 58.786 81.336 60.177 79.396 60.177 z M 26.537 52.177 h 49.508 l 5.182 -29.143 H 21.768 L 26.537 52.177 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(255,137,57); fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round" />
+	<path d="M 17.055 23.035 c -1.977 0 -3.695 -1.465 -3.961 -3.478 l -1.104 -8.376 H 4 c -2.209 0 -4 -1.791 -4 -4 s 1.791 -4 4 -4 h 11.496 c 2.007 0 3.703 1.487 3.966 3.477 l 1.563 11.854 c 0.289 2.19 -1.252 4.2 -3.443 4.489 C 17.405 23.023 17.229 23.035 17.055 23.035 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(255,137,57); fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round" />
+	<circle cx="26.31" cy="74.32" r="8.5" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(255,137,57); fill-rule: nonzero; opacity: 1;" transform="  matrix(1 0 0 1 0 0) "/>
+	<circle cx="74.44" cy="74.32" r="8.5" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(255,137,57); fill-rule: nonzero; opacity: 1;" transform="  matrix(1 0 0 1 0 0) "/>
+</g>
+</svg>

@@ -1,0 +1,73 @@
+{% extends 'home.html' %}
+{% block content2 %}
+
+    <div class="bg-black text-white flex-1">
+        <div class="container mx-auto px-4">
+
+            <!-- Cart Header -->
+            <div class="flex justify-between items-center mb-6">
+                <h1 class="text-3xl font-bold">My Art Cart</h1>
+                <a href="{% url 'browse' %}" class="text-orange-500 hover:text-orange-300">Continue Shopping</a>
+            </div>
+
+            <!-- Cart Items -->
+            <div class="flex flex-col gap-4 mb-6">
+                <!-- Single Cart Item -->
+
+                {% for item in cart_items %}
+
+                <div class="flex items-center justify-between p-4 border border-gray-700 rounded">
+                    <div class="flex items-center">
+                        <!-- Placeholder for Artwork Image -->
+                        <div class="w-24 h-24 bg-gray-800 mr-4"><img src="{{ item.art_post.image.url }}"></div>
+                        <div>
+                            <h2 class="text-xl font-semibold">{{  item.art_post.title }}</h2>
+                            <p class="text-orange-500">${{  item.art_post.price }}</p>
+                        </div>
+                    </div>
+                    <!-- Quantity Selector -->
+                    <div class="flex items-center">
+                        <a href="{% url 'remove_from_cart' %}?cart_item={{ item.art_post.id }}" class="text-orange-500 hover:text-orange-300">delete from cart</a>
+                        <a href="{% url 'update_cart' %}?cart_item={{ item.art_post.id }}&quantity=-1">
+                        <button class="text-orange-500 hover:text-orange-300 focus:outline-none">
+                            <span>-</span>
+                        </button>
+                            </a>
+                        <input type="number" value="{{ item.quantity }}" class="mx-2 w-8 text-center bg-gray-800 border-none focus:outline-none" />
+                        <a href="{% url 'update_cart' %}?cart_item={{ item.art_post.id }}&quantity=1">
+                        <button class="text-orange-500 hover:text-orange-300 focus:outline-none">
+                            <span>+</span>
+                        </button>
+                        </a>
+
+                    </div>
+                </div>
+                {% endfor %}
+                <!-- Add more cart items as needed -->
+            </div>
+
+            <!-- Cart Options -->
+            <div class="mb-6">
+                <label class="flex items-center">
+                    <input type="checkbox" class="form-checkbox text-orange-500">
+                    <span class="ml-2">Add gift wrapping for a special touch.</span>
+                </label>
+                <label class="flex items-center mt-2">
+                    <input type="checkbox" class="form-checkbox text-orange-500">
+                    <span class="ml-2">Subscribe for exclusive artist updates and promotions.</span>
+                </label>
+            </div>
+
+            <!-- Checkout Button -->
+            <div class="flex justify-end">
+                <a href="{% url 'home' %}" class="text-orange-500 hover:text-orange-300 mr-4">Back to home</a>
+                <a href="{% url 'check_out' %}" >
+                <button  class="bg-orange-500 hover:bg-orange-400 text-white font-bold py-2 px-4 rounded">
+                    Proceed to Checkout
+                </button>
+                    </a>
+            </div>
+        </div>
+    </div>
+
+  {% endblock content2 %}

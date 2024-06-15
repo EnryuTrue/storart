@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chats Page</title>
+</head>
+<body>
+    <h1>Chats</h1>
+    <!-- Add your chat content here -->
+
+    {% for message in messages %}
+    <li>{{ message }}</li>
+    {% endfor %}
+    <p>Welcome, {{ user.username }}!</p>
+    <br>
+    <p1>ur phone number is : {{ user.phone }} </p1>
+    <br>
+    <a href="{% url 'modify_credentials' %}">Modify Your Credentials</a>
+    <br>
+    <a href="{% url 'logout' %}">Sign Out</a>
+    <br>
+    <a href="{% url 'confirm_delete_account' %}">Delete Account</a>
+    <br>
+    <h2>All Members:</h2>
+    <ul>
+        {% for member in members %}
+            {% if member != user %}
+
+            <li><h3> {{ member.id }} <a href="{% url 'member_details' member.id %}">{{ member.username }}</a></h3></li>
+            {% endif %}
+        {% endfor %}
+    <div>
+            {% for i in x %}
+                <div>
+                    <h5>{{ i.idd }} -- {{ i.name }}</h5>
+                </div>
+            {% endfor %}
+    </div>
+
+    </ul>
+
+    <h2>Tic Tac Toe Game</h2>
+    <a href="{% url 'tic_tac_toe' %}" target="_blank">Play Tic Tac Toe</a>
+
+</body>
+</html>

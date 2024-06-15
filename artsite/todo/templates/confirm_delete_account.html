@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Confirm Account Deletion</title>
+</head>
+<body>
+    <h1>Confirm Account Deletion</h1>
+    <p>Before deleting your account, please enter your login credentials:</p>
+    <form method="post" action="{% url 'delete_account' %}">
+        {% csrf_token %}
+        <label for="username">Username:</label>
+        <input type="text" name="username" required>
+        <br>
+        <label for="password">Password:</label>
+        <input type="password" name="password" required>
+        <br>
+        <input type="submit" value="Delete Account">
+    </form>
+    <p><a href="{% url 'chats' %}">Cancel</a></p>
+</body>
+</html>

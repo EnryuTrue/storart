@@ -1,0 +1,176 @@
+{% extends 'home.html' %}
+{% block content2 %}
+
+    <div class="container">
+        <!-- Sidebar -->
+        <aside>
+            <h2>Suggested Categories</h2>
+            <ul>
+                <li>Abstract Art</li>
+                <li>Modern Art</li>
+                <li>Classical Art</li>
+                <li>Photography</li>
+                <li>Street Art</li>
+            </ul>
+        </aside>
+
+        <!-- Main Content -->
+        <div class="content">
+            <h2>Categories</h2>
+            <div class="grid">
+                <a href="{% url 'filtering' %}?category=painting" class="block">
+                <div class="category-card" style="background-image: url('../img/adventure time.jpg');">
+
+                    <div class="category-info">
+                        <h2>Digital</h2>
+                    </div>
+
+                </div>
+                </a>
+                <a href="{% url 'filtering' %}?category=sculpture" class="block">
+                <div class="category-card" style="background-image: url('../img/sculp.jpg');">
+                    <div class="category-info">
+                        <h2>Sculptures</h2>
+                    </div>
+                </div>
+                </a>
+                <a href="{% url 'filtering' %}?type=nft" class="block">
+                <div class="category-card" style="background-image: url('../img/image2-2.png');">
+                    <div class="category-info">
+                        <h2>NFTs</h2>
+                    </div>
+                </div>
+                </a>
+                <a href="{% url 'filtering' %}?category=painting" class="block">
+                <div class="category-card" style="background-image: url('../img/vintage.jpg');">
+                    <div class="category-info">
+                        <h2>Vintage Art</h2>
+                    </div>
+                </div>
+                </a>
+                <a href="{% url 'filtering' %}?category=photography" class="block">
+                <div class="category-card" style="background-image: url('../img/wallhaven1.jpg');">
+                    <div class="category-info">
+                        <h2>Photography</h2>
+                    </div>
+                </div>
+                </a>
+            </div>
+        </div>
+    </div>
+
+
+ <style>
+        body {
+            background-color: black;
+            color: white;
+            font-family: Arial, sans-serif;
+
+        }
+
+        .container {
+            display: flex;
+            max-width: full-width;
+            margin: 0 auto;
+            box-sizing: border-box;
+        }
+        aside {
+            width: 22%;
+            padding: 16px;
+        }
+        aside h2 {
+            font-size: 22px;
+            font-weight: bold;
+            margin-bottom: 16px;
+        }
+        aside ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+        aside ul li {
+            background-color: #fb8c00;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 8px;
+            transition: background-color 0.3s;
+        }
+        aside ul li:hover {
+            background-color: rgba(245, 124, 0, 0.8);
+        }
+        .content {
+            width: 78%;
+            margin-top: 16px;
+        }
+        .content h2 {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 12px;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+        }
+        .category-card {
+            position: relative;
+            height: 170px;
+            width: 240px;
+            border-radius: 12px;
+            overflow: hidden;
+            background-size: cover;
+            background-position: center;
+            transition: transform 0.3s;
+        }
+        .category-card:hover {
+            transform: scale(1.05);
+        }
+        .category-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 16px;
+            transition: background-color 0.3s;
+        }
+        .category-card:hover .category-info {
+            background-color: rgba(245, 124, 0, 0.8);
+        }
+        .category-info h2 {
+            font-size: 20px;
+            font-weight: bold;
+            margin: 0;
+        }
+        .category-info p {
+            font-size: 14px;
+            margin: 4px 0 0 0;
+        }
+        footer {
+            background-color: black;
+            color: white;
+            padding: 16px 32px;
+            box-sizing: border-box;
+        }
+        footer .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        footer ul {
+            display: flex;
+            gap: 24px;
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+        footer ul li a {
+            color: white;
+            text-decoration: none;
+        }
+        footer ul li a:hover {
+            color: #f57c00;
+        }
+    </style>
+
+{% endblock content2 %}

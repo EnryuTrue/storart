@@ -1,0 +1,61 @@
+{% extends 'home.html' %}
+{% block title %}List art{% endblock title %}
+{% block content2 %}
+    <div class="bg-black">
+
+        <div class="max-w-7xl bg-black mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <h1 class="text-3xl font-bold mb-8">Upload Your Artwork</h1>
+            <form method="POST" enctype="multipart/form-data" class="space-y-6">
+                {% csrf_token %}
+                <div>
+                    <label for="name" class="block text-sm  font-medium">Artwork Name</label>
+                    <input type="text" name="title" class="mt-1 block w-full px-4 py-2 bg-gray-800 border border-gray-700 rounded focus:outline-none focus:border-orange-500" placeholder="Enter artwork name">
+                </div>
+                <div>
+                    <label for="image" class="block text-sm font-medium">Artwork Image</label>
+                    <input type="file" name="image" class="mt-1 block w-full text-white" required >
+                </div>
+                <div>
+                    <label for="image" class="block text-sm text-white font-medium">Add additional pictures</label>
+                    <input type="file" name="additional_images" class="mt-1 block w-full text-white" multiple>
+                </div>
+                <div>
+                    <label for="description" class="block text-sm font-medium">Description</label>
+                    <textarea name="description" required rows="4" class="mt-1 block w-full px-4 py-2 bg-gray-800 border border-gray-700 rounded focus:outline-none focus:border-orange-500" placeholder="Enter description"></textarea>
+                </div>
+                <br>
+                <div>
+
+                    <input type="number" name="price"  class="mt-1 block w-full px-4 py-2 bg-gray-800 border border-gray-700 rounded focus:outline-none focus:border-orange-500" placeholder="Enter price" required>
+                </div>
+                <br>
+                <select name="type" id="id_type" class="mt-1 block w-full px-4 py-2 bg-gray-800 border border-gray-700 rounded focus:outline-none focus:border-orange-500">
+                    <option value=""   disabled selected>Chose a Type</option>
+                    {% for choice in form.type.field.choices %}
+                        <option value="{{ choice.0 }}">{{ choice.1 }}</option>
+                    {% endfor %}
+                </select>
+                <br>
+
+
+                <div>
+                    <label for="id_category" class="block text-sm font-medium"></label>
+                    <select name="category" id="id_category" class="mt-1 block w-full px-4 py-2 bg-gray-800 border border-gray-700 rounded focus:outline-none focus:border-orange-500">
+                        <option value=""  disabled selected>Chose a category</option>
+                        {% for choice in form.category.field.choices %}
+                            <option value="{{ choice.0 }}"  >{{ choice.1 }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <br>
+                <div>
+                    <button type="submit" class="w-full py-2 bg-orange-500 text-black font-semibold rounded-full hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500">Post Artwork</button>
+                </div>
+            </form>
+            {% for message in messages %}
+                <p style="color: #8f00b2;">{{ message }}</p>
+            {% endfor %}
+        </div>
+    </div>
+
+{% endblock content2 %}

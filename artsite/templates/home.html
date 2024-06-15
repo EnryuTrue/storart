@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Home{% endblock title %}</title>
+    <link rel="stylesheet" href="/output.css">
+    <style>
+        .card-slider {
+            overflow: hidden;
+            position: relative;
+        }
+
+        .card-container {
+            display: flex;
+        }
+
+        .card {
+            flex: 0 0 auto; /* Prevent flex items from shrinking or growing */
+            margin-right: 10px; /* Adjust as needed */
+    /* Adjust the card width and other styles as needed */
+        }
+
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .fade-in {
+            animation: fadeIn 1.5s ease-in-out;
+        }
+        .hover-zoom:hover {
+            transform: scale(1.05);
+            transition: transform 0.3s ease-in-out;
+        }
+        .draggable{
+            position: fixed;
+            cursor: grab;
+        }
+    </style>
+</head>
+<body class="bg-black">
+<div class="bg-black">
+    <header class="bg-black mb-0 mt-0 w-full h-20 flex items-center justify-between">
+        <nav class="flex items-center justify-between w-full px-8">
+        <a href="{% url 'home' %}">
+            <img src="../img/sitelogo.png" alt="Logo" class="h-10"></a>
+            <ul class="flex items-center space-x-4 gap-5">
+                <li><a href="{% url 'home' %}" class="text-white hover:text-orange-600">Home</a></li>
+                <li><a href="{% url 'categories' %}" class="text-white hover:text-orange-600">Categories</a></li>
+                <li><a href="{% url 'aboutus' %}" class="text-white hover:text-orange-600">About us</a></li>
+                <li><a href="{% url 'contact' %}" class="text-white hover:text-orange-600">Contact</a></li>
+            </ul>
+            <div class="flex items-center space-x-4 ">
+            <form action="{% url 'filtering' %}" method="post">
+                {% csrf_token %}
+                <input type="text" name="search" class="w-80 h-9 px-2 border-0 border-gray-300 rounded-full shadow-md bg-gray-800 text-gray-300 text-base font-sans font-normal outline-none" placeholder="Search">
+                <button type="submit" hidden></button>
+            </form>
+            <a href="{% url 'cart_detail' %}"><img src="/img/orange-shopping-cart-10907 (1).png" alt=""></a>
+                {% if user.is_authenticated %}
+                <p class="text-white hover:text-orange-600 list-none">Welcome, {{ user.username }}!</p>
+                    <a href="{% url 'profile_info' %}">
+                    <img src="..{{user.profile_picture.url}}" class="w-9 h-9 rounded-full border-2 border-orange-500" alt="Profile Picture">
+                </a>
+                <button class="w-24 h-9 px-2 border-0 rounded-full bg-orange-500 text-white text-base font-sans font-normal outline-none hover:bg-orange-600 hover:text-black list-none"><a href="{% url 'logoutuser' %}">Logout</a></button>
+                {% else %}
+
+                <a href="{% url 'loginuser' %}"><button class="w-24 h-9 px-2 border-0 rounded-full bg-orange-500 text-white text-base font-sans font-normal outline-none hover:bg-orange-600 hover:text-black">LogIn</button></a>
+                <a href="{% url 'signup' %}"><button class="w-24 h-9 px-2 border-0 rounded-full bg-orange-500 text-white text-base font-sans font-normal outline-none hover:bg-orange-600 hover:text-black">SignUp</button></a>
+                 {% endif %}
+            </div>
+        </nav>
+    </header>
+    {% block content1 %}
+        {% block content2 %}
+
+            <div class="relative fade-in">
+                <img src="../img/wallhaven-zy3l5o.jpg" alt="image" class="w-full h-96">
+                <div class="absolute inset-0 flex flex-col items-center justify-center">
+                    <h1 class="text-3xl font-bold fade-in text-center text-white mb-8" >Explore The World Of Art</h1>
+                    {% if user.is_authenticated %}
+
+                        <a href="{% url 'browse' %}?page=1"><button class="mt-4 px-4 py-2 fade-in bg-orange-500 text-white font-semibold rounded-full hover:bg-orange-600">Browse Now</button></a>
+
+                    {% else %}
+                        <a href="{% url 'loginuser' %}?page=1"><button class="mt-4 px-4 py-2 bg-orange-500 fade-in text-white font-semibold rounded-full hover:bg-orange-600">Browse Now</button></a>
+                    {% endif %}
+                </div>
+            </div>
+
+
+            <div class="bg-black  p-10">
+                <h3 class="text-white text-2xl fade-in font-semibold mb-6 flex justify-start mx-auto px-4 ml-16" style="font-family: 'Source Sans Pro'; line-height: 30px;">Lates Artwork</h3>
+            </div>
+            <div class="card-slider fade-in text-white px-3" style="padding: 5px" >
+                <div class="card-container" id="cardSlider">
+                    {% for post in art_posts %}
+                        <div class="card px-2">
+                            <a href="{% url 'product_page' post.id %}" class="block">
+                                <img src="..{{ post.image.url }}"
+                                     class="w-72 h-52 rounded-xl bg-cover bg-center bg-no-repeat transition duration-300 transform hover:scale-105"
+                                     alt="Artwork 1">
+                                <p class="mt-2 text-center">{{ post.title}}</p>
+                            </a>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+            </div>
+
+            <div class="bg-black p-10">
+                <h3 class="text-white text-2xl fade-in font-semibold mb-6 flex justify-start mx-auto px-4 ml-16" style="font-family: 'Source Sans Pro'; line-height: 30px;">Popular Categories</h3>
+            </div>
+            <div class="flex bg-black justify-around gap-3 px-3">
+                <div class="text-white font-semibold text-center">
+                    <a href="{% url 'filtering' %}?category=painting" class="block">
+                        <img src="../img/wallhaven.jpg" class="w-72 h-48 mr-4 rounded-xl bg-cover bg-center bg-no-repeat transition duration-300 transform hover:scale-105 hover:outline-orange" alt="Paintings">
+                        <h4 class="mt-4 mr-9 text-white transition-colors duration-300 hover:text-orange-500">Paintings</h4>
+                    </a>
+                </div>
+                <div class="text-white font-semibold text-center">
+                    <a href="{% url 'filtering' %}?category=photography" class="block">
+                        <img src="../img/wallhaven-k9wlm7.jpg" class="w-72 h-48 mr-4 rounded-xl bg-cover bg-center bg-no-repeat transition duration-300 transform hover:scale-105 hover:outline-orange" alt="Photography">
+                        <h4 class="mt-4 mr-9 text-white transition-colors duration-300 hover:text-orange-500">Photography</h4>
+                    </a>
+                </div>
+                <div class="text-white font-semibold text-center">
+                    <a href="{% url 'filtering' %}?category=sculpture" class="block">
+                        <img src="../img/sculpt.webp" class="w-72 h-48 mr-4 rounded-xl bg-cover bg-center bg-no-repeat transition duration-300 transform hover:scale-105 hover:outline-orange" alt="Art">
+                        <h4 class="mt-4 text-white transition-colors  duration-300 hover:text-orange-500">Sculpture</h4>
+                    </a>
+                </div>
+                <div class="text-white font-semibold text-center">
+                    <a href="{% url 'filtering' %}?category=digital_art" class="block">
+                        <img src="../img/adventure%20time.jpg" class="w-72 h-48 mr-4 rounded-xl bg-cover bg-center bg-no-repeat transition duration-300 transform hover:scale-105 hover:outline-orange" alt="Art">
+                        <h4 class="mt-4 text-white transition-colors duration-300 hover:text-orange-500">Digital Art</h4>
+                    </a>
+                </div>
+                <div class="text-white font-semibold text-center">
+                    <a href="{% url 'filtering' %}?type=nft" class="block">
+                        <img src="../img/nft.jpg" class="w-72 h-48 mr-4 rounded-xl bg-cover bg-center bg-no-repeat transition duration-300 transform hover:scale-105 hover:outline-orange" alt="Art">
+                        <h4 class="mt-4 text-white transition-colors duration-300 hover:text-orange-500">NFTs</h4>
+                    </a>
+                </div>
+            </div>
+            <section class="bg-black text-white py-20">
+                <div class="container mx-auto px-8">
+                    <h2 class="text-3xl font-bold text-center mb-8">Welcome to ArtExpo</h2>
+                    <p class="text-lg text-center mb-12">Discover a world of creativity and talent at ArtExpo. Our platform connects artists and buyers, providing a unique space to showcase and purchase exceptional artwork.</p>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <div class="bg-orange-500 rounded-xl shadow-md p-6">
+                            <h3 class="text-xl font-semibold mb-4">For Artists</h3>
+                            <p>Join ArtExpo to exhibit your artwork to a global audience. Whether you're a painter, photographer, sculptor, or digital artist, our platform provides the perfect opportunity to showcase your talent and connect with art enthusiasts.</p>
+                            <button class="mt-4 px-4 py-2 bg-black text-white font-semibold rounded-full hover:bg-gray-800">
+                                {% if user.is_authenticated %}
+                                    <a>Join Now</a>
+                                {% else %}
+                                    <a href="{% url 'signup' %}" >Join Now</a>
+                                {% endif %}
+
+                            </button>
+                        </div>
+                        <div class="bg-orange-500 rounded-xl shadow-md p-6">
+                            <h3 class="text-xl font-semibold mb-4">For Buyers</h3>
+                            <p>Explore a diverse collection of artwork from emerging and established artists. Find the perfect piece to complement your space or start your own art collection. With ArtExpo, discovering and purchasing art has never been easier.</p>
+                            <button class="mt-4 px-4 py-2 bg-black text-white font-semibold rounded-full hover:bg-gray-800">
+                                <a href="{% url 'browse' %}">Browse Art</a>
+                            </button>
+                        </div>
+                        <div class="bg-orange-500 rounded-xl shadow-md p-6">
+                            <h3 class="text-xl font-semibold mb-4">Community</h3>
+                            <p>Join our vibrant community of artists, collectors, and art enthusiasts. Engage in discussions, share inspiration, and connect with like-minded individuals who share your passion for art. ArtExpo is more than just a platform—it's a community.</p>
+                            <button class="mt-4 px-4 py-2 bg-black text-white font-semibold rounded-full hover:bg-gray-800">
+                                <a >Join Community</a>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="mt-12">
+                        <h3 class="text-2xl font-semibold text-center mb-6">What Our Users Say</h3>
+                        <div class="flex flex-col md:flex-row justify-center gap-8">
+                            <div class="bg-gray-800 rounded-xl shadow-md p-6 text-center">
+                                <p class="text-lg italic mb-4">"ArtExpo has revolutionized the way I showcase my artwork. The platform is user-friendly and has connected me with buyers worldwide."</p>
+                                <p class="font-semibold">— Artist</p>
+                            </div>
+                            <div class="bg-gray-800 rounded-xl shadow-md p-6 text-center">
+                                <p class="text-lg italic mb-4">"I found the perfect painting for my living room on ArtExpo. The variety and quality of art available are unparalleled."</p>
+                                <p class="font-semibold">— Buyer</p>
+                            </div>
+                            <div class="bg-gray-800 rounded-xl shadow-md p-6 text-center">
+                                <p class="text-lg italic mb-4">"The ArtExpo community is fantastic. I've made connections with fellow artists and art lovers that have inspired my work."</p>
+                                <p class="font-semibold">— Community Member</p>
+                            </div>
+                        </div>
+                    </div>
+                    {% if user.is_authenticated %}
+                        <div> 
+            <div class="p-10 flex justify-end">
+                            <a href="{% url 'lounge' %}">
+                                <button class="p-4 px-4 rounded-full bg-orange-500 text-white text-base font-sans font-normal outline-none hover:bg-orange-600 hover:text-black">+</button>   
+                </a>
+
+                            {% else %}
+                            <div class="mt-12 text-center">
+                                <h3 class="text-2xl font-semibold mb-6">Join Thousands of Happy Users</h3>
+                                <p class="text-lg mb-8">ArtExpo has over 10,000 artists and buyers from around the world. Be a part of our growing community today!</p>
+                                <button class="w-24 h-9 px-2 border-0 rounded-full bg-orange-500 text-white text-base font-sans font-normal outline-none hover:bg-orange-600 hover:text-black"><a href="{% url 'signup' %}">SignUp</a></button>
+                            </div>
+                        </div>
+                    {% endif %}
+            </section>
+
+
+            <section class="bg-black text-white py-10">
+                <div class="container mx-auto px-8">
+                    <h2 class="text-3xl font-bold text-center mb-4">Stay Updated!</h2>
+                    <p class="text-lg text-center mb-6">Subscribe to our newsletter and get the latest updates and offers.</p>
+                    <form class="max-w-xl mx-auto" method="post" action="{% url 'subscribe' %}">
+                        {% csrf_token %}
+                        <div class="flex flex-col sm:flex-row items-center sm:space-x-4">
+                            <input type="email" name="email" class="w-full px-4 py-2 mb-4 sm:mb-0 rounded-full bg-gray-800 text-gray-300 border border-gray-600 focus:outline-none focus:border-orange-500" placeholder="Enter your email" required>
+                            <button type="submit" class="w-24 h-9 px-2 border-0 rounded-full bg-orange-500 text-white text-base font-sans font-normal outline-none hover:bg-orange-600 hover:text-black">Subscribe</button>
+                        </div>
+                    </form>
+                </div>
+            </section>
+            
+            
+            
+
+        {% endblock content2 %}
+    {% endblock content1 %}
+
+
+<footer class="bg-black text-white py-8">
+    <div class="container mx-auto px-8">
+        <div class="flex items-center justify-between">
+            <p>&copy; 2024 ArtExpo. All rights reserved.</p>
+            <ul class="flex space-x-6">
+                <li><a href="rtyetyer.html" class="hover:text-orange-500">Home</a></li>
+                <li><a href="#" class="hover:text-orange-500">About</a></li>
+                <li><a href="#" class="hover:text-orange-500">Artists</a></li>
+                <li><a href="#" class="hover:text-orange-500">Contact</a></li>
+            </ul>
+        </div>
+    </div>
+</footer>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+        setInterval(() => {
+            if (totalSlides > 0) {
+                slides[currentSlide].classList.remove('visible');
+                currentSlide = (currentSlide + 1) % totalSlides;
+                slides[currentSlide].classList.add('visible');
+            }
+        }, 3000);
+
+        // Card slider
+        const cardSlider = document.getElementById('cardSlider');
+        const cards = document.querySelectorAll('#cardSlider .card');
+        const cardWidth = cards[0].offsetWidth + parseInt(window.getComputedStyle(cards[0]).marginRight, 10);
+        let currentCard = 0;
+
+        setInterval(() => {
+            cardSlider.style.transition = 'transform 0.5s ease';
+            cardSlider.style.transform = `translateX(-${cardWidth}px)`;
+
+            setTimeout(() => {
+                cardSlider.appendChild(cardSlider.firstElementChild);
+                cardSlider.style.transition = 'none';
+                cardSlider.style.transform = 'translateX(0)';
+
+                cardSlider.offsetHeight; 
+            }, 500); 
+        }, 3000);
+    });
+
+</script>
+</div>
+</body>
+</html>

@@ -1,0 +1,100 @@
+{% extends 'home.html' %}
+{% block title %}Browse{% endblock title %}
+    {% block content1 %}
+    <div class="bg-black">
+        <div class="bg-black py-4">
+            <form action="{% url 'filtering' %}?page=1" method="post">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex items-center justify-between">
+                    <div class="flex-1 mr-4">
+                        <input type="text" name="search" class="w-full bg-gray-800 focus:outline-none focus:ring-2 focus:ring-orange-500 text-white rounded-md py-2 px-4" placeholder="Search...">
+                    </div>
+                    <div class="flex space-x-4">
+
+                            {% csrf_token %}
+                        <div class="relative">
+                            <select name="category" class="block appearance-none bg-gray-800 text-white rounded-md py-2 px-4 focus:outline-none focus:ring-2 focus:ring-orange-500">
+                                <option value="" disabled selected>Everything</option>
+                                <option value="Digital Art">Digital Art</option>
+                                <option value="sculpture">Sculpture</option>
+                                <option value="photography">Photography</option>
+                                <option value="painting">Painting</option>
+                            </select>
+
+                        </div>
+                        <div class="relative ">
+                            <div class="relative flex gap-3">
+                                <input type="text" name="min_price" placeholder="lowest" class="block w-16 appearance-none bg-gray-800 text-white rounded-md py-2 px-4 focus:outline-none focus:ring-2 focus:ring-orange-500">
+                                <input type="text" name="max_price" placeholder="hieghst" class="block appearance-none bg-gray-800 text-white rounded-md py-2 px-4 focus:outline-none focus:ring-2 focus:ring-orange-500">
+                              </div>
+                        </div>
+                        <div class="relative">
+                            <select name="type" class="block appearance-none bg-gray-800 text-white rounded-md py-2 px-4 focus:outline-none focus:ring-2 focus:ring-orange-500">
+                                <option value="" disabled selected>Type</option>
+                                <option value="physical">Physical</option>
+                                <option value="digital">Digital</option>
+                                <option value="nft">NFT</option>
+                            </select>
+                        </div>
+                             <button type="submit" class="bg-orange-500 text-white py-2 px-4 rounded-md hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-500" >search</button>
+
+                    </div>
+                </div>
+            </div>
+                </form>
+        </div>
+    </div>
+{% block content %}
+    <main class="flex-grow fade-in">
+  <div class="grid grid-cols-4 gap-4 p-8 bg-black">
+
+
+
+        {% for post in page_obj %}
+        <div class="relative flex-grow bg-black rounded-lg overflow-hidden transition-transform duration-300 transform hover:scale-105">
+            <div class="w-full h-52 bg-cover bg-center bg-no-repeat rounded-lg fade-in" style="background-image: url({{ post.image.url }});"></div>
+            <div class="p-4">
+            <h3 class="text-white fade-in font-bold mb-2">{{ post.title }}</h3>
+            <p class="text-gray-300 fade-in mb-2">by <b>{{ post.user.username }}</b> at {{ post.timestamp }}</p>
+            <p class="text-gray-300 fade-in mb-2">{{ post.description }}</p>
+            <p class="text-orange-500 fade-in font-bold mb-2">${{ post.price }}</p>
+            <a href="{% url 'product_page' post.id %}" class="bg-orange-500 text-white fade-in py-2 px-4 rounded-md inline-block hover:bg-orange-600 transition-colors duration-300">View Product</a>
+
+            </div>
+             </div>
+            {% empty %}
+            <p>No art posts yet.</p>
+           {% endfor %}
+
+    </div>
+
+           {% if page_obj.has_other_pages %}
+           <div class="bg-black flex justify-between items-center p-10">
+            <div>
+            {% if page_obj.has_previous %}
+            <a href="?page={{ page_obj.previous_page_number }}" class="px-3 py-1 ml-1 bg-orange-500 text-white rounded-full">Prev</a>
+            {% else %}
+            <p  class="px-3 py-1 ml-1 bg-orange-500 text-black rounded-full">Prev</p>
+
+        {% endif %}
+       </div>
+        <div class="flex">
+        {% for i in num_pages %}
+        <a href="?page={{ i }}" class="flex justify-center items-center w-8 h-8 mx-1 bg-orange-500 text-white rounded-full">{{i}}</a>
+        {% endfor %}
+        </div>
+        <div>
+        {% if page_obj.has_next %}
+        <a href="?page={{ page_obj.next_page_number }}" class="px-3 py-1 mr-1 bg-orange-500 text-white rounded-full">Next</a>
+            {% else %}
+            <p  class="px-3 py-1 ml-1 bg-orange-500 text-black rounded-full">Next</p>
+        {% endif %}
+        </div>
+     </div>
+         {% endif %}
+    </main>
+
+
+{% endblock content %}
+{% endblock content1 %}
+

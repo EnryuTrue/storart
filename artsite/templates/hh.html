@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Messages</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #000;
+            color: #fff;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #000;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 32px;
+            border-bottom: 1px solid #333;
+        }
+
+        header img {
+            height: 40px;
+        }
+
+        header ul {
+            display: flex;
+            gap: 20px;
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        header a {
+            color: #fff;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        header a:hover {
+            color: #F97316;
+        }
+
+        header input {
+            width: 320px;
+            height: 36px;
+            padding: 0 8px;
+            background-color: #333;
+            border: none;
+            border-radius: 9999px;
+            color: #ccc;
+        }
+
+        .flex {
+            display: flex;
+        }
+
+        .h-screen {
+            height: 100vh;
+        }
+
+        .w-1-5 {
+            width: 20%;
+        }
+
+        .w-4-5 {
+            width: 80%;
+        }
+
+        .p-5 {
+            padding: 20px;
+        }
+
+        .overflow-y-auto {
+            overflow-y: auto;
+        }
+
+        .border-r-2, .border-t-2, .border-b-2 {
+            border-color: #333;
+            border-style: solid;
+        }
+
+        .border-r-2 {
+            border-right-width: 2px;
+        }
+
+        .border-t-2 {
+            border-top-width: 2px;
+        }
+
+        .border-b-2 {
+            border-bottom-width: 2px;
+        }
+
+        .rounded {
+            border-radius: 8px;
+        }
+
+        .rounded-full {
+            border-radius: 9999px;
+        }
+
+        .text-2xl {
+            font-size: 1.5rem;
+            margin-bottom: 24px;
+        }
+
+        .mb-4 {
+            margin-bottom: 16px;
+        }
+
+        .cursor-pointer {
+            cursor: pointer;
+        }
+
+        .bg-gray-700 {
+            background-color: #4a4a4a;
+        }
+
+        .bg-orange-500 {
+            background-color: #F97316;
+        }
+
+        .hover-bg-gray-700:hover {
+            background-color: #4a4a4a;
+        }
+
+        .hover-bg-orange-600:hover {
+            background-color: #ea6510;
+        }
+
+        .flex-col {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .items-center {
+            align-items: center;
+        }
+
+        .justify-between {
+            justify-content: space-between;
+        }
+
+        .space-x-4 {
+            margin-right: 16px;
+        }
+
+        .space-y-2 > * + * {
+            margin-top: 8px;
+        }
+
+        .max-w-2xl {
+            max-width: 672px;
+        }
+
+        .self-start {
+            align-self: flex-start;
+        }
+
+        .self-end {
+            align-self: flex-end;
+        }
+
+        .transition {
+            transition: transform 0.3s;
+        }
+
+        .ease-in-out {
+            transition-timing-function: ease-in-out;
+        }
+
+        .hover-transform:hover {
+            transform: scale(1.05);
+        }
+
+        .rounded-lg {
+            border-radius: 12px;
+        }
+
+        footer {
+            background-color: #000;
+            padding: 32px 0;
+            text-align: center;
+            border-top: 1px solid #333;
+        }
+
+        footer ul {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        footer a {
+            color: #fff;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        footer a:hover {
+            color: #F97316;
+        }
+    </style>
+</head>
+<body>
+
+<header class="flex items-center justify-between">
+    <nav class="flex items-center justify-between w-full">
+        <img src="../img/brave_screenshot_app.logopony.com.svg" alt="Logo">
+        <ul class="flex items-center">
+            <li><a href="home.html">Home</a></li>
+            <li><a href="#">Categories</a></li>
+            <li><a href="#">About us</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+        <div class="flex items-center space-x-4">
+            <input type="text" placeholder="Search">
+            <a href="#">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-9 h-9 text-white fill-current cursor-pointer hover-bg-orange-600" viewBox="0 0 24 24">
+                    <path fill-rule="evenodd" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"></path>
+                </svg>
+            </a>
+            <a href="#">
+                <img src="../img/profile-picture.jpg" class="w-9 h-9 rounded-full border-2 border-orange-500" alt="Profile Picture">
+            </a>
+            <a href="#">
+                <img src="../img/icons8-cart-64.png" class="w-9 h-9">
+            </a>
+        </div>
+    </nav>
+</header>
+
+<div class="bg-black text-white">
+    <div class="flex h-screen">
+        <!-- Sidebar -->
+        <div class="w-1-5 p-5 overflow-y-auto border-r-2 border-t-2 border-b-2">
+            <h1 class="text-2xl mb-4">Inbox</h1>
+            <!-- Active Tab -->
+            <div class="bg-orange-500 p-3 rounded mb-4">Recent Chats</div>
+
+            <!-- Chat List -->
+            <div>
+                <!-- Individual Chat Snippet -->
+                <div class="flex justify-between items-center p-3 hover-bg-gray-700 rounded mb-2 cursor-pointer transition ease-in-out">
+                    <div class="flex-col">
+                        <span class="font-semibold">Artist</span>
+                        <p class="text-sm text-gray-400">Let's discuss your next masterpiece...</p>
+                    </div>
+                    <span class="text-sm">11:43 AM</span>
+                </div>
+                <!-- End of Individual Chat Snippet -->
+            </div>
+        </div>
+
+        <!-- Chat Area -->
+        <div class="w-4-5 p-5 flex flex-col justify-between border-r-2 border-t-2 border-b-2">
+            <!-- Chat List -->
+            <div class="overflow-y-auto">
+                <!-- Individual Chat Snippet -->
+                <div class="flex justify-between items-center p-3 hover-bg-gray-700 rounded mb-2 cursor-pointer transition ease-in-out">
+                    <div class="flex-col">
+                        <span class="font-semibold">Name</span>
+                        <p class="text-sm text-gray-400">Last message...</p>
+                    </div>
+                    <a href="#">
+                        <img src="../img/profile-picture.jpg" class="w-9 h-9 rounded-full border-2 border-orange-500" alt="Profile Picture">
+                    </a>
+                </div>
+                <!-- End of Individual Chat Snippet -->
+            </div>
+
+            <!-- Main Chat Area -->
+            <div class="flex-1 overflow-y-auto">
+                <!-- Conversation Header (Optional) -->
+                <div class="mb-4">
+                    <h2 class="text-xl font-semibold">Conversation Title</h2>
+                </div>
+
+                <!-- Messages Container -->
+                <div class="flex-col space-y-2 p-3">
+                    <!-- Individual Message -->
+                    <div class="self-end max-w-2xl bg-orange-500 p-3 rounded-lg">
+                        <p>Hello! How are you today?</p>
+                    </div>
+                    <div class="self-start max-w-2xl bg-gray-700 p-3 rounded-lg">
+                        <p>I'm doing well, thanks for asking!</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Message Input Field -->
+            <div class="mt-6">
+                <div class="flex items-center gap-4">
+                    <input type="text" placeholder="Type your message here..." class="w-full p-4 bg-gray-800 rounded placeholder-gray-400">
+                    <button class="p-2 bg-orange-500 rounded hover-bg-orange-600">
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24">
+                            <path d="M15.172 7l-6.364 6.364m0 0l6.364 6.364m-6.364-6.364H3m12 0h6"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer>
+    <div>
+        <p>&copy; 2024 ArtExpo. All rights reserved.</p>
+        <ul>
+            <li><a href="home.html">Home</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Artists</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+    </div>
+</footer>
+</body>
+</html>
